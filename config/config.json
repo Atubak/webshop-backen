@@ -1,0 +1,20 @@
+{
+  "development": {
+    "url": "postgres://dcmryzos:UG14mnVv0sIw2K-8PuhqJOjShC4lx1b1@kandula.db.elephantsql.com/dcmryzos",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
