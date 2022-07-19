@@ -1,4 +1,4 @@
-const { product: productModel } = require("../models");
+const { product: productModel, category: categoryModel } = require("../models");
 const { Router } = require("express");
 const router = new Router();
 
@@ -20,13 +20,16 @@ router.get("/:id", async (req, res, next) => {
     //get the url param
     const { id } = req.params;
     //get specific product
-    const product = await productModel.findByPk(id);
+    const product = await productModel.findByPk(id, {
+      include: [categoryModel],
+    });
+
     if (!product) {
       res.status(404).send("This product does not exist");
     }
     res.json(product);
   } catch (e) {
-    console.log(e);
+    console.log(e.response);
     next(e);
   }
 });
