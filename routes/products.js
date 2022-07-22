@@ -1,4 +1,8 @@
-const { product: productModel, category: categoryModel } = require("../models");
+const {
+  product: productModel,
+  category: categoryModel,
+  review: reviewModel,
+} = require("../models");
 const { Router } = require("express");
 const router = new Router();
 
@@ -30,6 +34,23 @@ router.get("/:id", async (req, res, next) => {
     res.json(product);
   } catch (e) {
     console.log(e.response);
+    next(e);
+  }
+});
+
+router.get("/:id/reviews", async (req, res, next) => {
+  try {
+    //get product id
+    const { id } = req.params;
+
+    //get all reviews
+    const allReviews = await reviewModel.findAll({ where: { productId: id } });
+
+    if (!allReviews) return res.status(404).send("sorry, no reviews yet!");
+
+    res.json(allReviews);
+  } catch (e) {
+    console.log(e.message);
     next(e);
   }
 });
